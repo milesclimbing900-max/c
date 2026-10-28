@@ -12,9 +12,9 @@ jobs:
 
       - name: Arrange files into src folders
         run: |
-          mkdir -p src/main/java/dev/krypton/regionmap
+          mkdir -p src/main/java/com/regionmap/krmap
           mkdir -p src/main/resources/assets/krypton_regionmap/lang
-          mv *.java src/main/java/dev/krypton/regionmap/
+          mv *.java src/main/java/com/regionmap/krmap/
           mv fabric.mod.json src/main/resources/
           mv en_us.json src/main/resources/assets/krypton_regionmap/lang/
 
@@ -24,7 +24,7 @@ jobs:
           java-version: 21
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 8.12
+          gradle-version: 9.2.1
       - run: gradle build --no-daemon
       - uses: actions/upload-artifact@v4
         with:
