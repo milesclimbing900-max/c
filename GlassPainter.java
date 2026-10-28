@@ -1,4 +1,4 @@
-package dev.krypton.regionmap;
+package com.regionmap.krmap;
 
 import net.minecraft.client.gui.DrawContext;
 

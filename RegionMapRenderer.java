@@ -1,6 +1,6 @@
-package dev.krypton.regionmap;
+package com.regionmap.krmap;
 
-import dev.krypton.regionmap.RegionData.Region;
+import com.regionmap.krmap.RegionData.Region;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 
@@ -104,12 +104,12 @@ public final class RegionMapRenderer {
                 float[] a = CENTROID[rg.ordinal()];
                 float cx = mx + a[0] / a[2] * M / n, cy = my + a[1] / a[2] * M / n;
                 int tw = mc.textRenderer.getWidth(rg.label);
-                c.getMatrices().push();
-                c.getMatrices().translate(cx, cy, 0);
-                c.getMatrices().scale(s, s, 1f);
+                c.getMatrices().pushMatrix();
+                c.getMatrices().translate(cx, cy);
+                c.getMatrices().scale(s, s);
                 c.fill(-tw / 2 - 2, -1, tw / 2 + 2, 9, 0x90000000);
                 c.drawText(mc.textRenderer, rg.label, -tw / 2, 0, 0xFFFFFFFF, false);
-                c.getMatrices().pop();
+                c.getMatrices().popMatrix();
             }
         }
 
@@ -149,11 +149,11 @@ public final class RegionMapRenderer {
             String txt = (has ? String.format("X %,d  Z %,d", (int) wx, (int) wz) : "X -  Z -") + "  \u00b7  " + RegionData.regionAt(pc, pr).label;
             float s = Math.min(1f, (M - 4f) / Math.max(1, mc.textRenderer.getWidth(txt)));
             s = Math.min(s, 0.85f);
-            c.getMatrices().push();
-            c.getMatrices().translate(mx + 2, my + M + 3, 0);
-            c.getMatrices().scale(s, s, 1f);
+            c.getMatrices().pushMatrix();
+            c.getMatrices().translate(mx + 2, my + M + 3);
+            c.getMatrices().scale(s, s);
             c.drawText(mc.textRenderer, txt, 0, 0, 0xFFFFFFFF, true);
-            c.getMatrices().pop();
+            c.getMatrices().popMatrix();
         }
 
         // 7) edit-mode overlay

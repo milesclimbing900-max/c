@@ -1,5 +1,6 @@
-package dev.krypton.regionmap;
+package com.regionmap.krmap;
 
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -86,20 +87,22 @@ public class RegionMapEditScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mx, double my, int button) {
-        if (super.mouseClicked(mx, my, button)) return true;
+    public boolean mouseClicked(Click click, boolean doubled) {
+        if (super.mouseClicked(click, doubled)) return true;
+        double mx = click.x(), my = click.y();
         int w = RegionMapRenderer.panelW(cfg), h = RegionMapRenderer.panelH(cfg);
-        if (button == 0 && mx >= cfg.x + w - 12 && mx <= cfg.x + w && my >= cfg.y + h - 12 && my <= cfg.y + h) {
+        if (click.button() == 0 && mx >= cfg.x + w - 12 && mx <= cfg.x + w && my >= cfg.y + h - 12 && my <= cfg.y + h) {
             resizing = true; return true;
         }
-        if (button == 0 && mx >= cfg.x && mx <= cfg.x + w && my >= cfg.y && my <= cfg.y + h) {
+        if (click.button() == 0 && mx >= cfg.x && mx <= cfg.x + w && my >= cfg.y && my <= cfg.y + h) {
             dragging = true; offX = mx - cfg.x; offY = my - cfg.y; return true;
         }
         return false;
     }
 
     @Override
-    public boolean mouseDragged(double mx, double my, int button, double dx, double dy) {
+    public boolean mouseDragged(Click click, double dx, double dy) {
+        double mx = click.x(), my = click.y();
         if (resizing) {
             cfg.size = Math.max(80, Math.min(360, (int) (mx - cfg.x) - RegionMapRenderer.PAD * 2 + 4));
             return true;
@@ -109,15 +112,15 @@ public class RegionMapEditScreen extends Screen {
             cfg.y = (int) Math.max(0, Math.min(height - RegionMapRenderer.panelH(cfg), my - offY));
             return true;
         }
-        return super.mouseDragged(mx, my, button, dx, dy);
+        return super.mouseDragged(click, dx, dy);
     }
 
     @Override
-    public boolean mouseReleased(double mx, double my, int button) {
+    public boolean mouseReleased(Click click) {
         boolean wasResizing = resizing;
         dragging = false; resizing = false;
         if (wasResizing) clearAndInit();
-        return super.mouseReleased(mx, my, button);
+        return super.mouseReleased(click);
     }
 
     @Override

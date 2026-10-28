@@ -1,4 +1,4 @@
-package dev.krypton.regionmap;
+package com.regionmap.krmap;
 
 /** 9x9 grid of 50k-block cells covering -225k..+225k on X and Z. */
 public final class RegionData {

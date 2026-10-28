@@ -16,8 +16,8 @@ The glass look uses only gradients/translucent fills. There is **no blur shader*
 ## Build
 Push to GitHub. The Actions workflow (`.github/workflows/build.yml`) builds the jar:
 Actions tab -> latest run -> Artifacts -> `krypton-regionmap`.
-Locally: `gradle build` (Gradle 8.12+, JDK 21) -> `build/libs/krypton-regionmap-1.0.0.jar`.
+Locally: `gradle build` (Gradle 9.2+, JDK 21) -> `build/libs/krypton-regionmap-1.0.0.jar`.
 
 ## Targets
-Fabric, Minecraft 1.21.4 (change versions in `gradle.properties`).
+Fabric, Minecraft 1.21.11 (change versions in `gradle.properties`).
 To hook into Krypton's own module system, call `RegionMapRenderer.render(drawContext, RegionMapMod.CONFIG, false)` from its HUD render event.

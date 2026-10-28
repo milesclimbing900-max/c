@@ -1,4 +1,4 @@
-package dev.krypton.regionmap;
+package com.regionmap.krmap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
