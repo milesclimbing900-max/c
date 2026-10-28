@@ -9,6 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Arrange files into src folders
+        run: |
+          mkdir -p src/main/java/dev/krypton/regionmap
+          mkdir -p src/main/resources/assets/krypton_regionmap/lang
+          mv *.java src/main/java/dev/krypton/regionmap/
+          mv fabric.mod.json src/main/resources/
+          mv en_us.json src/main/resources/assets/krypton_regionmap/lang/
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
